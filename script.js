@@ -14,6 +14,7 @@ const adminLoginForm = document.querySelector("#adminLoginForm");
 const adminPasswordInput = document.querySelector("#adminPassword");
 const adminErrorElement = document.querySelector("#adminError");
 const adminCancelButton = document.querySelector("#adminCancelButton");
+const displayModeButton = document.querySelector("#displayModeButton");
 const completedCountElement = document.querySelector("#completedCount");
 const remainingCountElement = document.querySelector("#remainingCount");
 const completionRateElement = document.querySelector("#completionRate");
@@ -21,6 +22,7 @@ const temperatureValueElement = document.querySelector("#temperatureValue");
 const progressSummaryElement = document.querySelector("#progressSummary");
 const displayProgressSummaryElement = document.querySelector("#displayProgressSummary");
 const displayTemperatureValueElement = document.querySelector("#displayTemperatureValue");
+const displayTitleElement = document.querySelector(".display-title");
 const progressFillElement = document.querySelector("#progressFill");
 const thermometerLiquidElement = document.querySelector("#thermometerLiquid");
 const thermometerBulbElement = document.querySelector(".thermometer-bulb");
@@ -33,6 +35,8 @@ const resetButton = document.querySelector("#resetButton");
 const manualForm = document.querySelector("#manualForm");
 const manualCountInput = document.querySelector("#manualCount");
 const manualApplyButton = document.querySelector("#manualApplyButton");
+const DEFAULT_DISPLAY_TITLE = "학교폭력 실태조사 참여 온도계";
+const FULLSCREEN_DISPLAY_TITLE = "참여 온도계";
 
 let adminMode = window.sessionStorage.getItem(ADMIN_MODE_KEY) === "true";
 let completedCount = loadSavedCount();
@@ -201,6 +205,10 @@ function syncFullscreenButton() {
   document.body.classList.toggle("is-fullscreen", active);
   fullscreenToggleButton.setAttribute("aria-pressed", active ? "true" : "false");
   fullscreenToggleButton.textContent = active ? "전체화면 해제" : "전체화면";
+
+  if (displayTitleElement) {
+    displayTitleElement.textContent = active ? FULLSCREEN_DISPLAY_TITLE : DEFAULT_DISPLAY_TITLE;
+  }
 }
 
 async function toggleFullscreen() {
@@ -267,6 +275,12 @@ adminToggleButton.addEventListener("click", () => {
 if (fullscreenToggleButton) {
   fullscreenToggleButton.addEventListener("click", () => {
     toggleFullscreen();
+  });
+}
+
+if (displayModeButton) {
+  displayModeButton.addEventListener("click", () => {
+    setAdminMode(false);
   });
 }
 

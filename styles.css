@@ -128,9 +128,11 @@ body.admin-mode .app-shell {
 }
 
 body.is-fullscreen .app-shell {
+  width: min(calc((100dvh - 56px) * 0.62), calc(100vw - 12px));
   min-height: 100dvh;
-  padding-top: 64px;
-  padding-bottom: 24px;
+  padding-top: 48px;
+  padding-bottom: 6px;
+  align-items: flex-start;
 }
 
 .hero-card {
@@ -165,6 +167,14 @@ body.admin-mode .hero-card {
   gap: 16px;
 }
 
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .admin-badge {
   flex-shrink: 0;
   padding: 10px 14px;
@@ -173,6 +183,13 @@ body.admin-mode .hero-card {
   color: var(--accent-deep);
   font-size: 0.9rem;
   font-weight: 800;
+}
+
+.mode-switch-button {
+  padding: 11px 16px;
+  font-size: 0.92rem;
+  box-shadow: none;
+  background: rgba(20, 33, 61, 0.08);
 }
 
 .eyebrow,
@@ -416,7 +433,8 @@ body.admin-mode .thermometer-stage {
 }
 
 body.is-fullscreen .thermometer-stage {
-  min-height: calc(100dvh - 88px);
+  min-height: calc(100dvh - 54px);
+  align-items: stretch;
 }
 
 .ambient {
@@ -454,8 +472,30 @@ body.admin-mode .thermometer-card {
   padding: 26px;
 }
 
+body.is-fullscreen .ambient {
+  display: none;
+}
+
+body.is-fullscreen .thermometer-card {
+  width: 100%;
+  max-width: none;
+  height: min(calc(100dvh - 58px), calc((100vw - 12px) / 0.62));
+  max-height: calc(100dvh - 58px);
+  aspect-ratio: 31 / 50;
+  padding: 14px 12px 10px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .display-intro {
   text-align: center;
+}
+
+body.is-fullscreen .display-intro {
+  display: grid;
+  gap: 3px;
 }
 
 .thermometer-header {
@@ -467,6 +507,29 @@ body.admin-mode .thermometer-card {
   font-weight: 800;
 }
 
+body.is-fullscreen .display-eyebrow,
+body.is-fullscreen .display-notice {
+  display: none;
+}
+
+body.is-fullscreen .display-title {
+  font-size: clamp(1.04rem, 2.45vh, 1.56rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+body.is-fullscreen .thermometer-header {
+  margin-top: 7px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+}
+
+body.is-fullscreen .thermometer-header span {
+  display: none;
+}
+
 .thermometer-visual {
   display: flex;
   justify-content: center;
@@ -474,6 +537,14 @@ body.admin-mode .thermometer-card {
   align-items: stretch;
   min-height: 540px;
   padding-top: 22px;
+}
+
+body.is-fullscreen .thermometer-visual {
+  flex: 1;
+  min-height: 0;
+  gap: 9px;
+  padding-top: 6px;
+  align-items: flex-end;
 }
 
 .thermometer-scale {
@@ -487,6 +558,11 @@ body.admin-mode .thermometer-card {
   font-weight: 700;
 }
 
+body.is-fullscreen .thermometer-scale {
+  padding: 4px 0 80px;
+  font-size: 0.72rem;
+}
+
 .thermometer-body {
   position: relative;
   width: 148px;
@@ -494,6 +570,10 @@ body.admin-mode .thermometer-card {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+}
+
+body.is-fullscreen .thermometer-body {
+  width: 138px;
 }
 
 .thermometer-tube {
@@ -508,6 +588,11 @@ body.admin-mode .thermometer-card {
     inset 0 0 0 1px rgba(20, 33, 61, 0.05),
     inset 0 0 26px rgba(99, 179, 255, 0.1);
   overflow: hidden;
+}
+
+body.is-fullscreen .thermometer-tube {
+  width: 70px;
+  height: clamp(270px, calc(100dvh - 312px), 470px);
 }
 
 .thermometer-liquid {
@@ -578,6 +663,12 @@ body.admin-mode .thermometer-card {
   box-shadow:
     0 0 0 1px rgba(20, 33, 61, 0.05),
     0 18px 30px rgba(255, 106, 61, 0.2);
+}
+
+body.is-fullscreen .thermometer-bulb {
+  width: 116px;
+  height: 116px;
+  margin-top: -14px;
 }
 
 .bulb-liquid {
@@ -805,6 +896,25 @@ body.admin-mode .thermometer-card {
   font-size: 1.4rem;
 }
 
+body.is-fullscreen .display-summary {
+  gap: 8px;
+  margin-top: 8px;
+}
+
+body.is-fullscreen .display-summary-item {
+  padding: 8px 10px;
+  border-radius: 14px;
+}
+
+body.is-fullscreen .display-summary-item span {
+  font-size: 0.72rem;
+}
+
+body.is-fullscreen .display-summary-item strong {
+  margin-top: 4px;
+  font-size: 1.02rem;
+}
+
 .goal-chip {
   margin-top: 18px;
   padding: 14px 18px;
@@ -812,6 +922,10 @@ body.admin-mode .thermometer-card {
   background: rgba(20, 33, 61, 0.08);
   text-align: center;
   font-weight: 800;
+}
+
+body.is-fullscreen .goal-chip {
+  display: none;
 }
 
 body:not(.admin-mode) .thermometer-liquid {
@@ -1172,6 +1286,12 @@ body.admin-mode .thermometer-bulb.count-boost .bulb-liquid {
     padding: 24px 18px;
   }
 
+  .admin-panel-header,
+  .admin-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .status-panel,
   .display-summary {
     grid-template-columns: 1fr;
@@ -1322,18 +1442,18 @@ body.admin-mode .thermometer-bulb.count-boost .bulb-liquid {
 
   body.is-fullscreen .top-controls {
     top: 10px;
-    width: min(460px, calc(100% - 16px));
+    width: min(calc((100dvh - 24px) * 0.62), calc(100vw - 12px));
   }
 
   body.is-fullscreen .app-shell {
-    width: min(460px, calc(100% - 16px));
-    padding-top: 60px;
-    padding-bottom: 10px;
+    width: min(calc((100dvh - 56px) * 0.62), calc(100vw - 12px));
+    padding-top: 48px;
+    padding-bottom: 6px;
   }
 
   body.is-fullscreen .thermometer-stage {
-    min-height: calc(100dvh - 70px);
-    align-items: center;
+    min-height: calc(100dvh - 54px);
+    align-items: stretch;
   }
 
   body.is-fullscreen .ambient {
@@ -1341,8 +1461,9 @@ body.admin-mode .thermometer-bulb.count-boost .bulb-liquid {
   }
 
   body.is-fullscreen .thermometer-card {
-    max-height: calc(100dvh - 76px);
-    padding: 20px 16px 14px;
+    height: min(calc(100dvh - 58px), calc((100vw - 12px) / 0.62));
+    max-height: calc(100dvh - 58px);
+    padding: 14px 12px 10px;
     border-radius: 24px;
     display: flex;
     flex-direction: column;
@@ -1350,12 +1471,11 @@ body.admin-mode .thermometer-bulb.count-boost .bulb-liquid {
   }
 
   body.is-fullscreen .display-eyebrow {
-    margin-bottom: 6px;
-    font-size: 0.74rem;
+    display: none;
   }
 
   body.is-fullscreen .display-title {
-    font-size: clamp(1.2rem, 4.4vw, 1.8rem);
+    font-size: clamp(1.04rem, 2.45vh, 1.56rem);
     line-height: 1.02;
   }
 
@@ -1364,62 +1484,59 @@ body.admin-mode .thermometer-bulb.count-boost .bulb-liquid {
   }
 
   body.is-fullscreen .thermometer-header {
-    margin-top: 12px;
-    padding: 8px 12px;
+    margin-top: 7px;
+    padding: 6px 10px;
   }
 
   body.is-fullscreen .thermometer-visual {
     flex: 1;
     min-height: 0;
-    gap: 12px;
-    padding-top: 12px;
+    gap: 9px;
+    padding-top: 6px;
     align-items: flex-end;
   }
 
   body.is-fullscreen .thermometer-scale {
-    padding: 8px 0 88px;
-    font-size: 0.78rem;
+    padding: 4px 0 80px;
+    font-size: 0.72rem;
   }
 
   body.is-fullscreen .thermometer-body {
-    width: 146px;
+    width: 138px;
   }
 
   body.is-fullscreen .thermometer-tube {
-    width: 74px;
-    height: clamp(250px, calc(100dvh - 430px), 390px);
+    width: 70px;
+    height: clamp(270px, calc(100dvh - 312px), 470px);
   }
 
   body.is-fullscreen .thermometer-bulb {
-    width: 122px;
-    height: 122px;
-    margin-top: -16px;
+    width: 116px;
+    height: 116px;
+    margin-top: -14px;
   }
 
   body.is-fullscreen .display-summary {
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 8px;
   }
 
   body.is-fullscreen .display-summary-item {
-    padding: 10px 10px;
-    border-radius: 16px;
+    padding: 8px 10px;
+    border-radius: 14px;
   }
 
   body.is-fullscreen .display-summary-item span {
-    font-size: 0.76rem;
+    font-size: 0.72rem;
   }
 
   body.is-fullscreen .display-summary-item strong {
     margin-top: 4px;
-    font-size: 1.08rem;
+    font-size: 1.02rem;
   }
 
   body.is-fullscreen .goal-chip {
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 16px;
-    font-size: 0.9rem;
+    display: none;
   }
 }
 
