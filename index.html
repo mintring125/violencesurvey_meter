@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학교폭력실태조사 온도계</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="top-controls">
+    <button type="button" class="top-fab fullscreen-fab" id="fullscreenToggleButton" aria-pressed="false">
+      전체화면
+    </button>
+    <button type="button" class="top-fab admin-fab" id="adminToggleButton" aria-haspopup="dialog" aria-controls="adminModal">
+    관리자 모드
+  </button>
+
+  </div>
+
+  <main class="app-shell">
+    <section class="hero-card">
+      <div class="hero-copy" id="adminPanel" hidden>
+        <div class="admin-panel-header">
+          <div>
+            <p class="eyebrow">2026 학교폭력 실태조사</p>
+            <h1>관리자 조정 패널</h1>
+          </div>
+          <span class="admin-badge">변경 가능</span>
+        </div>
+        <p class="hero-text">
+          일반 디스플레이 화면은 온도계만 보입니다.
+          응답 수 변경과 직접 입력은 관리자 모드에서만 사용할 수 있습니다.
+        </p>
+
+        <div class="status-panel">
+          <article class="metric">
+            <span class="metric-label">현재 응답</span>
+            <strong id="completedCount">0명</strong>
+          </article>
+          <article class="metric">
+            <span class="metric-label">남은 인원</span>
+            <strong id="remainingCount">102명</strong>
+          </article>
+          <article class="metric">
+            <span class="metric-label">응답률</span>
+            <strong id="completionRate">0%</strong>
+          </article>
+          <article class="metric emphasis">
+            <span class="metric-label">학급 온도</span>
+            <strong id="temperatureValue">12.0°C</strong>
+          </article>
+        </div>
+
+        <div class="progress-area">
+          <div class="progress-label-row">
+            <span>진행 상황</span>
+            <strong id="progressSummary">0 / 102</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button type="button" class="action-button primary" id="increaseButton">응답 +1</button>
+          <button type="button" class="action-button secondary" id="decreaseButton">되돌리기 -1</button>
+          <button type="button" class="action-button ghost" id="resetButton">처음부터</button>
+        </div>
+
+        <form class="manual-form" id="manualForm">
+          <label for="manualCount">응답 수 직접 입력</label>
+          <div class="manual-input-row">
+            <input id="manualCount" name="manualCount" type="number" min="0" max="102" step="1" inputmode="numeric"
+              placeholder="0~102">
+            <button type="submit" class="action-button dark" id="manualApplyButton">적용</button>
+          </div>
+          <p class="manual-help">행사 중간에 실제 응답 수로 바로 맞출 때 사용하세요.</p>
+        </form>
+
+        <p class="message-banner" id="messageBanner">한 명의 참여가 교실 온도를 올립니다.</p>
+      </div>
+
+      <div class="thermometer-stage">
+        <div class="ambient ambient-left"></div>
+        <div class="ambient ambient-right"></div>
+        <div class="thermometer-card">
+          <div class="display-intro">
+            <p class="display-eyebrow">2026 학교폭력 실태조사</p>
+            <h2 class="display-title">학교폭력 실태조사 참여 온도계</h2>
+            <p class="display-notice">여러분들이 참여하면 매일 아침에 참여율은 갱신됩니다.</p>
+          </div>
+          <div class="thermometer-header">
+            <span>Class Meter</span>
+            <strong id="thermometerPercent">0%</strong>
+          </div>
+          <div class="thermometer-visual">
+            <div class="thermometer-scale" aria-hidden="true">
+              <span>100</span>
+              <span>75</span>
+              <span>50</span>
+              <span>25</span>
+              <span>0</span>
+            </div>
+            <div class="thermometer-body">
+              <div class="thermometer-tube">
+                <div class="thermometer-liquid" id="thermometerLiquid">
+                  <div class="liquid-current current-1"></div>
+                  <div class="liquid-current current-2"></div>
+                  <div class="liquid-current current-3"></div>
+                  <div class="liquid-sparkle sparkle-1"></div>
+                  <div class="liquid-sparkle sparkle-2"></div>
+                  <div class="liquid-sparkle sparkle-3"></div>
+                  <div class="liquid-sparkle sparkle-4"></div>
+                  <div class="liquid-sparkle sparkle-5"></div>
+                  <div class="liquid-sparkle sparkle-6"></div>
+                </div>
+                <div class="thermometer-shine"></div>
+              </div>
+              <div class="thermometer-bulb">
+                <div class="bulb-liquid"></div>
+                <div class="bulb-bubbles" aria-hidden="true">
+                  <div class="bulb-bubble"></div>
+                  <div class="bulb-bubble"></div>
+                  <div class="bulb-bubble"></div>
+                  <div class="bulb-bubble"></div>
+                  <div class="bulb-bubble"></div>
+                </div>
+                <div class="bulb-gloss" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+          <div class="display-summary">
+            <article class="display-summary-item">
+              <span>응답 현황</span>
+              <strong id="displayProgressSummary">0 / 102</strong>
+            </article>
+            <article class="display-summary-item">
+              <span>참여 온도</span>
+              <strong id="displayTemperatureValue">12.0°C</strong>
+            </article>
+          </div>
+          <div class="goal-chip" id="goalChip">출발 준비</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="admin-modal" id="adminModal" hidden>
+    <div class="admin-modal-backdrop" id="adminModalBackdrop"></div>
+    <div class="admin-modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
+      <p class="eyebrow">관리자 인증</p>
+      <h2 id="adminModalTitle">관리자 모드로 전환</h2>
+      <p class="modal-text">응답 수 변경은 비밀번호 확인 후에만 가능합니다.</p>
+
+      <form class="admin-login-form" id="adminLoginForm">
+        <label for="adminPassword">비밀번호</label>
+        <input id="adminPassword" name="adminPassword" type="password" inputmode="numeric"
+          autocomplete="current-password" placeholder="비밀번호 입력">
+        <p class="admin-error" id="adminError" hidden>비밀번호가 올바르지 않습니다.</p>
+        <div class="modal-actions">
+          <button type="button" class="action-button ghost" id="adminCancelButton">취소</button>
+          <button type="submit" class="action-button primary">입장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
